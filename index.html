@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sổ chi tiêu</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Chi tiêu">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#0f766e">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: calc(env(safe-area-inset-top) + 16px) 16px calc(env(safe-area-inset-bottom) + 16px);
+      font-family: -apple-system, system-ui, sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+    }
+    .total { background: #0f766e; color: #fff; border-radius: 14px; padding: 16px; margin-bottom: 16px; }
+    .total small { opacity: .85; }
+    .total strong { display: block; font-size: 30px; margin-top: 4px; }
+    form { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+    /* Dưới 16px thì Safari tự zoom khi bấm vào ô nhập */
+    input, button { font-size: 16px; padding: 12px; border-radius: 10px; border: 1px solid #d1d5db; width: 100%; }
+    button { background: #fff; color: #111827; }
+    button[type=submit] { background: #0f766e; color: #fff; border: 0; font-weight: 600; }
+    ul { list-style: none; margin: 0 0 16px; padding: 0; }
+    li { display: flex; align-items: center; gap: 8px; background: #fff; border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; }
+    li .info { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+    li .date { font-size: 13px; color: #6b7280; }
+    li button { width: auto; padding: 6px 10px; border: 0; color: #b91c1c; }
+    .backup { display: flex; gap: 8px; }
+    li.empty { display: block; text-align: center; color: #6b7280; background: none; padding: 16px 0; }
+  </style>
+</head>
+<body>
+  <div class="total">
+    <small>Tổng chi tháng này</small>
+    <strong id="total">0 ₫</strong>
+  </div>
+
+  <form id="form">
+    <input id="name" placeholder="Chi cho gì? (vd: cà phê)" required>
+    <input id="amount" type="text" inputmode="numeric" placeholder="Số tiền (vd: 35000)" required>
+    <button type="submit">Thêm</button>
+  </form>
+
+  <ul id="list"></ul>
+
+  <div class="backup">
+    <button id="export" type="button">Xuất backup</button>
+    <button id="import" type="button">Nhập backup</button>
+    <input id="file" type="file" accept=".json,application/json" hidden>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
